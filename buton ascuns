@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Hidden Button</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: gray;
+    }
+
+    #numButtons {
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 5px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+    }
+
+    #generateBtn {
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    .btn {
+      font-size: 18px;
+      padding: 20px 40px;
+      margin: 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <input type="number" id="numButtons" placeholder="Insert number">
+  <button id="generateBtn">Generate</button>
+  <div id="buttonsContainer"></div>
+
+  <script>
+    document.getElementById('generateBtn').addEventListener('click', function () {
+      const num = parseInt(document.getElementById('numButtons').value);
+      const buttonsContainer = document.getElementById('buttonsContainer');
+      buttonsContainer.innerHTML = ''; // Curăță conținutul anterior
+
+      if (!isNaN(num) && num > 0) {
+        const randomWinner = Math.floor(Math.random() * num);
+
+        for (let i = 0; i < num; i++) {
+          const button = document.createElement('button');
+          button.className = 'btn';
+          button.textContent = 'Button ' + (i + 1);
+
+          if (i === randomWinner) {
+            button.addEventListener('click', function () {
+              alert('Winner!');
+            });
+          } else {
+            button.addEventListener('click', function () {
+              alert('Loser!');
+            });
+          }
+
+          buttonsContainer.appendChild(button);
+        }
+      } else {
+        alert('Insert a valid number');
+      }
+    });
+  </script>
+</body>
+</html>
